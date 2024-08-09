@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useSignInMutation } from "../../context/api/userApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setToken, setUser } from "../../context/slices/authSlice";
+import { setToken } from "../../context/slices/authSlice";
 const SignIn = () => {
   const [SignIn, { data, isSuccess, error }] = useSignInMutation();
   const dispatch = useDispatch();
@@ -12,8 +12,7 @@ const SignIn = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(setToken(data.payload.token));
-      dispatch(setUser(data.payload.user));
-      navigate("/dashboard");
+      navigate("/dashboard/createBlog");
     }
   }, [isSuccess]);
 
