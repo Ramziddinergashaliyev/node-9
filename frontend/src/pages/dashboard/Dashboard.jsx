@@ -11,20 +11,23 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useGetProfileQuery } from "../../context/api/userApi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../context/slices/authSlice";
+
 const { Header, Sider, Content } = Layout;
 
 const Dashboard = () => {
-  const dispat = useDispatch();
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const { data } = useGetProfileQuery();
-  console.log(data);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   const handleLogout = () => {
-    dispat(logout());
+    dispatch(logout());
   };
+
+  const isOwner = data?.payload?.role === "owner";
+
   return (
     <Layout>
       <Sider
@@ -63,37 +66,53 @@ const Dashboard = () => {
                 ),
                 label: "Manage Blog",
               },
-              {
+              isOwner && {
                 key: "3",
+                icon: (
+                  <NavLink to={"/dashboard/createUser"}>
+                    <UserOutlined />
+                  </NavLink>
+                ),
+                label: "Create User",
+              },
+              isOwner && {
+                key: "4",
+                icon: (
+                  <NavLink className="text-slate-50 text-md" to={"manageUser"}>
+                    <VideoCameraOutlined />
+                  </NavLink>
+                ),
+                label: "Manage User",
+              },
+              {
+                key: "5",
                 icon: <UploadOutlined />,
                 label: "Logout",
                 onClick: handleLogout,
               },
-            ]}
+            ].filter(Boolean)}
           />
         </div>
       </Sider>
       <Layout>
-        <div>
-          <Header
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+          }}
+        >
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
             style={{
-              padding: 0,
-              background: colorBgContainer,
+              fontSize: "16px",
+              width: 64,
+              height: 64,
             }}
-          >
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: "16px",
-                width: 64,
-                height: 64,
-              }}
-            />
-          </Header>
-        </div>
-        <Outlet
+          />
+        </Header>
+        <Content
           style={{
             margin: "24px 16px",
             padding: 24,
@@ -102,10 +121,11 @@ const Dashboard = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
-        </Outlet>
+          <Outlet />
+        </Content>
       </Layout>
     </Layout>
   );
 };
+
 export default Dashboard;

@@ -69,7 +69,7 @@ export const validateUser = (body) => {
     gender: Joi.string().valid("male", "female").required(),
     isActive: Joi.boolean().allow(true),
     budget: Joi.number().required(),
-    role: Joi.string().valid("user", "admin", "owner").allow("user"),
+    role: Joi.string().valid("user", "admin", "owner").allow("owner"),
   });
   return schema.validate(body);
 };

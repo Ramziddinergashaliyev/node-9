@@ -177,6 +177,23 @@ class UsersController {
       });
     }
   }
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      await Users.findByIdAndDelete(id);
+      res.status(201).json({
+        msg: "user is deleted",
+        variant: "success",
+        payload: null,
+      });
+    } catch {
+      res.status(500).json({
+        msg: "server error",
+        variant: "error",
+        payload: null,
+      });
+    }
+  }
 }
 
 export default new UsersController();
