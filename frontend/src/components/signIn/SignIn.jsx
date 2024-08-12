@@ -47,7 +47,7 @@ const SignIn = () => {
             },
           ]}
         >
-          <Input placeholder="username" />
+          <Input placeholder="rmz03" />
         </Form.Item>
 
         <Form.Item
@@ -60,7 +60,7 @@ const SignIn = () => {
             },
           ]}
         >
-          <Input.Password placeholder="password" />
+          <Input.Password placeholder="12345678" />
         </Form.Item>
 
         <Form.Item>

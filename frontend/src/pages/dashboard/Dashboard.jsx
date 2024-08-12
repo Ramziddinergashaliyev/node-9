@@ -7,7 +7,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useGetProfileQuery } from "../../context/api/userApi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../context/slices/authSlice";
@@ -25,6 +25,8 @@ const Dashboard = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const { pathname } = useLocation();
 
   const isOwner = data?.payload?.role === "owner";
 
@@ -46,10 +48,11 @@ const Dashboard = () => {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={["createBlog"]}
+            selectedKeys={pathname.split("/").slice(-1)[0]}
             items={[
               {
-                key: "1",
+                key: "createBlog",
                 icon: (
                   <NavLink to={"/dashboard/createBlog"}>
                     <UserOutlined />
@@ -58,7 +61,7 @@ const Dashboard = () => {
                 label: "Create Blog",
               },
               {
-                key: "2",
+                key: "manageBlog",
                 icon: (
                   <NavLink className="text-slate-50 text-md" to={"manageBlog"}>
                     <VideoCameraOutlined />
@@ -67,7 +70,7 @@ const Dashboard = () => {
                 label: "Manage Blog",
               },
               isOwner && {
-                key: "3",
+                key: "createUser",
                 icon: (
                   <NavLink to={"/dashboard/createUser"}>
                     <UserOutlined />
@@ -76,7 +79,7 @@ const Dashboard = () => {
                 label: "Create User",
               },
               isOwner && {
-                key: "4",
+                key: "manageUser",
                 icon: (
                   <NavLink className="text-slate-50 text-md" to={"manageUser"}>
                     <VideoCameraOutlined />
