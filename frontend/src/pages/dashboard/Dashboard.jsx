@@ -32,14 +32,8 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <Sider
-        className="h-screen"
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-      >
-        <div className="demo-logo-vertical" />
-        <div>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="sticky top-0 left-0 h-screen">
           <div>
             <h2 className="px-8 py-4 text-2xl text-white">
               {data?.payload?.fname}
@@ -86,6 +80,27 @@ const Dashboard = () => {
                   </NavLink>
                 ),
                 label: "Manage User",
+              },
+              {
+                key: "createProduct",
+                icon: (
+                  <NavLink to={"/dashboard/createProduct"}>
+                    <UserOutlined />
+                  </NavLink>
+                ),
+                label: "Create Product",
+              },
+              {
+                key: "manageProduct",
+                icon: (
+                  <NavLink
+                    className="text-slate-50 text-md"
+                    to={"manageProduct"}
+                  >
+                    <VideoCameraOutlined />
+                  </NavLink>
+                ),
+                label: "Manage Product",
               },
               {
                 key: "5",

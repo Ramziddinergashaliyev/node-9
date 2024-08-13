@@ -4,7 +4,9 @@ import CreateBlog from "./pages/dashboard/createBlog/CreateBlog";
 import ManageBlog from "./pages/dashboard/manageBlog/ManageBlog";
 import { useSelector } from "react-redux";
 import CreateUser from "./pages/dashboard/createUser/CreateUser";
-import ManageUser from "./pages/dashboard/manageUser.jsx/ManageUser";
+import ManageUser from "./pages/dashboard/manageUser/ManageUser";
+import CreateProduct from "./pages/dashboard/createProduct/CreateProduct";
+import ManageProduct from "./pages/dashboard/manageProduct/ManageProduct";
 const Home = lazy(() => import("./pages/home/Home"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const Login = lazy(() => import("./pages/login/Login"));
@@ -26,6 +28,8 @@ const App = () => {
             <Route path="manageBlog" element={<ManageBlog />} />
             <Route path="createUser" element={<CreateUser />} />
             <Route path="manageUser" element={<ManageUser />} />
+            <Route path="createProduct" element={<CreateProduct />} />
+            <Route path="manageProduct" element={<ManageProduct />} />
           </Route>
         </Route>
       </Routes>

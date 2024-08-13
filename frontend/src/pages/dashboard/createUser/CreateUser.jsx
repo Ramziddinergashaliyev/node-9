@@ -8,7 +8,6 @@ const CreateUser = () => {
   const [createUser] = useRegisterUserMutation();
 
   const handleCreate = (values) => {
-    // 'values' will include the 'gender' field if selected
     createUser(values);
   };
 
