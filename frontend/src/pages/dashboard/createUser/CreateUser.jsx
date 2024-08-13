@@ -1,14 +1,17 @@
 import React from "react";
 import { Button, Form, Input, Select } from "antd";
 import { useRegisterUserMutation } from "../../../context/api/userApi";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 const CreateUser = () => {
   const [createUser] = useRegisterUserMutation();
+  const navigate = useNavigate();
 
   const handleCreate = (values) => {
     createUser(values);
+    navigate("/dashboard/manageUser");
   };
 
   const onFinishFailed = (errorInfo) => {

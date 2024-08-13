@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useCreateBlogsMutation } from "../../../context/api/blogsApi";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog = () => {
   const [createBlog] = useCreateBlogsMutation();
+  const navigate = useNavigate();
 
   const handleCreate = (values) => {
     createBlog(values);
+    navigate("/dashboard/manageBlog");
   };
 
   const onFinishFailed = (errorInfo) => {
